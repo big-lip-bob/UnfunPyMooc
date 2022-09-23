@@ -1,1 +1,1 @@
-def anagrammes(a, b): return sorted(a) == sorted (b)
+def anagrammes(a, b): return sorted(a) == sorted(b)
