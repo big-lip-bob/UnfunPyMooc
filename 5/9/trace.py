@@ -1,0 +1,1 @@
+def trace(m): return sum([m[i][i] for i in range(len(m))])
