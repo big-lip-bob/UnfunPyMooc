@@ -5,3 +5,4 @@
 * Had no switch statements (3.10)
 * Doesn't have pattern matching in function arguments
 * Cannot unpack iterables in comprehensions
+* Disallows returning from files for no good reason
