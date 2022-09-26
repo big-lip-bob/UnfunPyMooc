@@ -1,38 +1,26 @@
-facts = [1, 1, 2]
-def fact(n):
-    for i in range(len(facts), n + 1):
-        facts.append(facts[i - 1] * i)
-    return facts[n]
-
-def div10(n):
-    acc = 1
-    for i in range(0, n): acc /= 10
-    return acc
-
+epsilon = 10 ** -6
 def absdiff(a, b):
     if a < b: return b - a
     else: return a - b
 
-epsilon = div10(6)
-
-count = 3
-
 init = float(input())
 
-initpows = [1.]
-def initpow(n):
-    for i in range(len(initpows), n + 1):
-        initpows.append(initpows[i - 1] * init)
-    return initpows[n]
+lastFact = 1
+lastPow  = 1. * init
 
-aprox = init
-preva = init + epsilon * 2
+aprox = 0
+preva = -init
 
-while absdiff(aprox, preva) > epsilon:
+count = 1
+while True:
+
+    aprox += lastPow / lastFact * (-1, 1)[count % 2]
+
+    if absdiff(aprox, preva) < epsilon: break
+    lastPow  *= init * init
+    lastFact *= (count * 2) * (count * 2 + 1)
+
     preva = aprox
-    term = initpow(count) / fact(count)
-    if count // 2 % 2 != 0: term = -term
-    aprox += term
-    count += 2
+    count += 1
 
 print(aprox)
