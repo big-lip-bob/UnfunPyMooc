@@ -16,7 +16,6 @@ while True:
     lastPow  *= init * init
     lastFact *= (count * 2) * (count * 2 + 1)
 
-    preva = aprox
     count += 1
 
 print(aprox)
