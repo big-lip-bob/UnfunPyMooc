@@ -9,7 +9,7 @@ lastFact = 1 * 1
 lastPow  = 1 * init
 
 aprox = 0
-preva = -init
+preva = float('NaN')
 
 count = 1
 while True:
