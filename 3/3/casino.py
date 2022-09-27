@@ -1,7 +1,7 @@
 pari = int(input()) # [0; 16]
 tirage = int(input()) # [0; 12]
 
-print(10 * (((tirage != 0) & ((tirage <= 10) ^ tirage ^ pari), (tirage ^ pari) & 1)[pari < 15] * 2, (tirage == pari) * 12)[pari < 13])
+print(10 * (((tirage != 0) & ((tirage < 11) ^ tirage ^ pari), (tirage ^ pari) & 1)[pari < 15] * 2, (tirage == pari) * 12)[pari < 13])
 
 """
 if pari <= 12:# [0; 12]
