@@ -1,4 +1,4 @@
 a = int(input())
 b = int(input())
 
-print(not (a % b == 0 or b % a == 0))
+print(max(a, b) % min(a, b) != 0)
