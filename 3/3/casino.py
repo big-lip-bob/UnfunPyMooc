@@ -4,6 +4,7 @@ tirage = int(input()) # [0; 12]
 print((((tirage != 0) & ((tirage < 11) ^ tirage ^ pari), (tirage ^ pari) & 1)[pari < 15] * 20, (tirage == pari) * 120)[pari < 13])
 
 """
+mise = 10
 if pari <= 12:# [0; 12]
     if tirage == pari: print(mise * 12)
     else: print(mise * 0)
