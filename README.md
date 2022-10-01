@@ -6,3 +6,4 @@
 * Doesn't have pattern matching in function arguments
 * Cannot unpack iterables in comprehensions
 * Disallows returning from files for no good reason
+* `range` only supports `int`egers
