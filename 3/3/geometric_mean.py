@@ -1,7 +1,2 @@
-import math
-
-a = float(input())
-b = float(input())
-
-if 0 <= a and 0 <= b: print(math.sqrt(a * b))
+if (a := float(input())) >= 0 and (b := float(input())) >= 0: print((a * b) ** .5)
 else: print("Erreur")
