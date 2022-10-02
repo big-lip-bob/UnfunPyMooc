@@ -1,9 +1,7 @@
 sum = 0
 count = 0
 
-while True:
-    num = int(input())
-    if num < 0: break
+while (num := int(input())) >= 0:
     sum += num
     count += 1
 
