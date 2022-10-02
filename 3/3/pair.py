@@ -1,1 +1,1 @@
-print(int(input()) % 2 == 0)
+print(int(input()) & 1 == 0)
