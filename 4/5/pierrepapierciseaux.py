@@ -1,4 +1,4 @@
-import random
+from random import seed, randint
 
 def bat(j1, j2): # 0 : PIERRE, 1 : FEUILLE, 2 : CISEAUX
     return j1 == (j2 + 2) % 3
@@ -21,10 +21,10 @@ def match(j1, j2):
     else:
         return -1
 
-random.seed(int(input()))
+seed(int(input()))
 points = 0
 for i in range(0, 5):
-    j1 = random.randint(0, 2)
+    j1 = randint(0, 2)
     j2 = int(input())
     point = match(j1, j2)
     points += point
