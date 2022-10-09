@@ -12,6 +12,5 @@ def catalan(n):
             * (i * 2 + 2)
             / ((i + 1) * (i + 2))
         )
-        print(cache[i - 1])
-
+        
     return int(cache[n - 2] * 2)
