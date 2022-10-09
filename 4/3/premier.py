@@ -1,9 +1,7 @@
-import math
-
 def premier(n):
     if n < 2: return False
     if 2 < n and n % 2 == 0: return False
-    for d in range(3, int(math.sqrt(n)) + 1, 2):
+    for d in range(3, int(n ** .5) + 1, 2):
         if n % d == 0: return False
     return True
 
