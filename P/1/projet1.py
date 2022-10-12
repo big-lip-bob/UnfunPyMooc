@@ -30,7 +30,7 @@ def ai_turn(billes_sac):
     """
     return (billes_sac - 1) % 5 or 1 + (7 <= billes_sac and 70 < randint(1, 100))
 
-""" Settigns """
+""" Settings """
 min_billes_sac = 6
 max_billes_sac = 40
 
