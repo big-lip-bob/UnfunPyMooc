@@ -4,7 +4,7 @@ from messages import *
 """ Functions """
 def range_ask(prompt, min, max):
     """
-    Fonction ustensile pour faciliter l'épuration de l'entrée pour être comprise dans une borne donnée
+    Fonction utilitaire pour faciliter l'épuration de l'entrée pour être comprise dans une borne donnée
 
     :param prompt: La sequence qui va être imprimée lors de la demande (formattée avec min et max)
     :param min: Borne minimum pour l'entrée
@@ -71,7 +71,7 @@ class Robot:
     turn_summary = message_7 # n billes retirées par l'IA
     next_turn = None
     lose = message_8 # Une seule bille, gagné
-    suicide = "Les robots sont encore et toujours aussi bête" # Impossible
+    suicide = "Les robots sont encore et toujours aussi bêtes" # Impossible
 
 """ Main Loop """
 
