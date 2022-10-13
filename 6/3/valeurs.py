@@ -1,0 +1,1 @@
+def valeurs(dico): return [dico[mot] for mot in sorted(dico)]
