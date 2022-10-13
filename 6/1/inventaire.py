@@ -1,0 +1,1 @@
+def inventaire(offres, objets): return {offres[objet] for objet in objets}

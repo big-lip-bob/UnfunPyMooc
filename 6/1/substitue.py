@@ -1,0 +1,1 @@
+def substitue(message, abreviation): return [message := message.replace(key, abreviation[key]) for key in abreviation][-1]

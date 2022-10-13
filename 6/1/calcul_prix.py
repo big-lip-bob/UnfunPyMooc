@@ -1,0 +1,1 @@
+def calcul_prix(produits, catalogue): return sum([(catalogue[produit] or 0) * produits[produit] for produit in produits])
