@@ -7,3 +7,4 @@
 * Cannot unpack iterables in comprehensions
 * Disallows returning from files for no good reason
 * `range` only supports `int`egers
+* Exceptions are unironically used for control flow???
