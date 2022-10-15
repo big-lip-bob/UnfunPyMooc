@@ -18,7 +18,9 @@ def collapseAt(g, x, y, n):
     if type(s) == set:
         if n in s:
             s -= {n}
-            if len(s) == 1: g[y][x] = next(n for n in s)
+            if len(s) == 1:
+                g[y][x] = s.pop()
+                return 1
             return s and 1 or -1
     return 0
 
