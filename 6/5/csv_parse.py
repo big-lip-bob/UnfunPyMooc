@@ -1,18 +1,11 @@
-def parse_csv(iter, separator = ';'):
-    headers = list(next(iter)[:-1].split(separator))
-    return [line[:-1].split(separator) for line in iter], headers
-
 def open_csv(file, separator = ';'):
     with open(file, 'r', encoding = "UTF-8") as file:
-        return parse_csv(file, separator)
+        headers = list(next(file)[:-1].split(separator))
+        return [line[:-1].split(separator) for line in file], headers
 
-def indexKeyMap(l): return
-
-def lesser(l, max):
+def greater(l, max):
     for i in l:
-        if i and max < int(i): return False
-    return True
-
+        if i and max < int(i): return True
 
 [(fails, fnames), (counts, cnames)] = [open_csv(input()) for _ in range(2)] # [open_csv(["result-pass-fail-0.csv", "result-count-0.csv"][_]) for _ in range(2)] #
 
@@ -26,7 +19,7 @@ max_fails = 10
 for c in range(len(counts)):
     count = counts[c]
     fail = fails[c]
-    if lesser(count, max_fails):
+    if not greater(count, max_fails):
         for f in range(len(cnames)):
             if fail[ftocm[f]] == "VRAI": points[f] += 1
 
