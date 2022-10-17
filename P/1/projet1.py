@@ -103,7 +103,6 @@ while True:
 
             if player.next_turn: print(player.next_turn.format(billes_sac))
 
-        else: continue
-        break
+        else: continue; break
 
     if input(entree_4).lower() != "oui": break # OUI Oui oUi ouI OUi OuI oUI oui
