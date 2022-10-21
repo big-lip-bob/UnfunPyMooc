@@ -2,6 +2,7 @@
 
 ## What did I learn from this ?
 ### Python isn't that good, it:
+* The only Scoping unit in Python is a Function?????!!!
 * Had no switch statements (3.10)
 * Doesn't have tuple pattern matching in function arguments
 * Cannot unpack iterables in comprehensions
