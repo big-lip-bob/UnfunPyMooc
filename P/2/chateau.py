@@ -1,7 +1,6 @@
 import ast
-
-import CONFIGS
 import turtle # Let me drown
+import CONFIGS
 
 class Cell:
     Vide, Mur, Sortie, Porte, Item, Visitee = 0, 1, 2, 3, 4, 5
