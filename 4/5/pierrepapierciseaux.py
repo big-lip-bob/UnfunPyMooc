@@ -8,9 +8,8 @@ def match(j1, j2): return bat(j1, j2) * 1 or (j1 == j2) - 1
 seed(int(input()))
 points = 0
 for i in range(0, 5):
-    [j1, j2] = [randint(0, 2), int(input())]
-    point = match(j1, j2)
-    points += point
+    j1, j2 = randint(0, 2), int(input())
+    points += (point := match(j1, j2))
     print(f"{symbol(j1)} {status(point)} {symbol(j2)} : {points}")
 
 print("Gagné" if points > 0 else "Nul" if not points else "Perdu")
