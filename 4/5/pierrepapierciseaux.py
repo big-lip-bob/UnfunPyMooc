@@ -1,8 +1,7 @@
 from random import seed, randint
 
-def bat(j1, j2): # 0 : PIERRE, 1 : FEUILLE, 2 : CISEAUX
-    return j1 == (j2 + 2) % 3
 def symbol(s): return ("Pierre", "Feuille", "Ciseaux")[s]
+def bat(j1, j2): return j1 == (j2 + 2) % 3
 def status(s): return ("bat", "annule", "est battu par")[s + 1]
 def match(j1, j2): return bat(j1, j2) * 1 or (j1 == j2) - 1
 
