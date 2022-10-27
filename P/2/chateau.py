@@ -129,6 +129,9 @@ class MazeGame:
         self.addItem(item)
         self.drawAnnouncements(f"Vous avez trouver un indice: {item}", 1)
 
+    def drawAnnouncements(self, text, fontType):
+        self.announcementGfx.undo()
+        self.announcementGfx.write(text, font = self.fontKinds[fontType])
 
     def tryDoor(self, dx, dy):
         self.drawAnnouncements("La porte est fermée", 1)
@@ -168,6 +171,11 @@ class MazeGame:
         self.castleGfx.fillcolor(self.cfg.COULEURS[self.getCell(x, y).kind])
         self.castleGfx.stamp()
 
+    def drawMaze(self):
+        for y in range(self.mapH):
+            for x in range(self.mapW):
+                self.drawSquare(x, y)
+
     def drawPlayer(self):
         self.drawGoto(*reversed(self.player))
 
@@ -176,15 +184,6 @@ class MazeGame:
         self.castleGfx.shapesize(self.cellRatio * self.cfg.RATIO_PERSONNAGE / 20)
         self.castleGfx.fillcolor(self.cfg.COULEUR_PERSONNAGE)
         self.castleGfx.stamp()
-
-    def drawMaze(self):
-        for y in range(self.mapH):
-            for x in range(self.mapW):
-                self.drawSquare(x, y)
-
-    def drawAnnouncements(self, text, fontType):
-        self.announcementGfx.undo()
-        self.announcementGfx.write(text, font = self.fontKinds[fontType])
 
     def drawInit(self):
         self.announcementGfx.write("Bienvenu dans le Labyrinthe Python", font = self.fontKinds[2])
