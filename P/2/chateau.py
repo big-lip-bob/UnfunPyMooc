@@ -10,7 +10,7 @@ class Cell:
         self.kind = kind
 
     def passable(self): return self.kind not in [Cell.Mur, Cell.Porte]
-    def visit(self): self.kind = self.Visitee
+    def visit(self): self.kind = Cell.Visitee
 
 class MazeGame:
     # Constructor: Initializes and builds the maze + turtle logic
