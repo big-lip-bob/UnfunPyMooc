@@ -176,7 +176,7 @@ class MazeGame:
 
         self.castleGfx.shape("circle")
         self.castleGfx.pencolor("black")
-        self.castleGfx.shapesize(self.cellRatio / 2 * self.cfg.RATIO_PERSONNAGE / 10)
+        self.castleGfx.shapesize(self.cellRatio * self.cfg.RATIO_PERSONNAGE / 20)
         self.castleGfx.fillcolor(self.cfg.COULEUR_PERSONNAGE)
         self.castleGfx.stamp()
 
