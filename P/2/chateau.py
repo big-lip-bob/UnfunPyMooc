@@ -26,7 +26,7 @@ class MazeGame:
         # Turtle Setups
         self.bindControls()
 
-        self.gfx = MazeGame.makeTurtle()
+        self.castleGfx = MazeGame.makeTurtle()
 
         self.announcementGfx = MazeGame.makeTurtle()
         self.announcementGfx.goto(self.cfg.POINT_AFFICHAGE_ANNONCES)
@@ -159,28 +159,28 @@ class MazeGame:
     def drawSquare(self, x, y):
         (ox, oy) = self.cfg.ZONE_PLAN_MAXI
 
-        self.gfx.goto(ox - (self.mapW - (x + .5)) * self.cellRatio, oy - (y - .5) * self.cellRatio)
+        self.castleGfx.goto(ox - (self.mapW - (x + .5)) * self.cellRatio, oy - (y - .5) * self.cellRatio)
 
-        self.gfx.shape("square")
-        self.gfx.pencolor(self.cfg.COULEUR_EXTERIEUR)
-        self.gfx.shapesize(self.cellRatio / 20)
-        self.gfx.fillcolor(self.cfg.COULEURS[self.getCell(x, y).kind])
-        self.gfx.stamp()
+        self.castleGfx.shape("square")
+        self.castleGfx.pencolor(self.cfg.COULEUR_EXTERIEUR)
+        self.castleGfx.shapesize(self.cellRatio / 20)
+        self.castleGfx.fillcolor(self.cfg.COULEURS[self.getCell(x, y).kind])
+        self.castleGfx.stamp()
 
     def drawPlayer(self):
         # Player
         (ox, oy) = self.cfg.ZONE_PLAN_MAXI
 
         (py, px) = self.player
-        self.gfx.goto(ox - (self.mapW - (px + .5)) * self.cellRatio, oy - (py + 0) * self.cellRatio)
+        self.castleGfx.goto(ox - (self.mapW - (px + .5)) * self.cellRatio, oy - (py + 0) * self.cellRatio)
 
-        self.gfx.fillcolor(self.cfg.COULEUR_PERSONNAGE)
-        self.gfx.pencolor("black")
-        self.gfx.pendown()
-        self.gfx.begin_fill()
-        self.gfx.circle(self.cellRatio / 2 * self.cfg.RATIO_PERSONNAGE)
-        self.gfx.end_fill()
-        self.gfx.penup()
+        self.castleGfx.fillcolor(self.cfg.COULEUR_PERSONNAGE)
+        self.castleGfx.pencolor("black")
+        self.castleGfx.pendown()
+        self.castleGfx.begin_fill()
+        self.castleGfx.circle(self.cellRatio / 2 * self.cfg.RATIO_PERSONNAGE)
+        self.castleGfx.end_fill()
+        self.castleGfx.penup()
 
     def cartesianIter(self):
         for y in range(self.mapH):
