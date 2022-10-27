@@ -155,12 +155,12 @@ class MazeGame:
     def getCell(self, x, y): return self.map[y][x]
     def inBounds(self, x, y): return 0 <= x < self.mapW and 0 <= y < self.mapH
 
-    def goto(self, x, y):
+    def drawGoto(self, x, y):
         (ox, oy) = self.cfg.ZONE_PLAN_MAXI
         self.castleGfx.goto(ox - (self.mapW - (x + .5)) * self.cellRatio, oy - (y - .5) * self.cellRatio)
 
     def drawSquare(self, x, y):
-        self.goto(x, y)
+        self.drawGoto(x, y)
 
         self.castleGfx.shape("square")
         self.castleGfx.pencolor(self.cfg.COULEUR_EXTERIEUR)
@@ -169,7 +169,7 @@ class MazeGame:
         self.castleGfx.stamp()
 
     def drawPlayer(self):
-        self.goto(*reversed(self.player))
+        self.drawGoto(*reversed(self.player))
 
         self.castleGfx.shape("circle")
         self.castleGfx.pencolor("black")
