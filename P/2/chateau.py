@@ -153,8 +153,6 @@ class MazeGame:
 
 
     def bindControls(self):
-        # for i in range(4): (dx, dy) = (-dy, dx) # Python qui n'a pas la notion de scopes autre que les fonctions?!?!
-        #   turtle.onkeypress(lambda: self.movePlayer(dx, dy), ("Down", "Right", "Up", "Left")[i])
         turtle.onkeypress(lambda: self.movePlayer( 1,  0), "Up"   )
         turtle.onkeypress(lambda: self.movePlayer( 0,  1), "Right")
         turtle.onkeypress(lambda: self.movePlayer(-1,  0), "Down" )
