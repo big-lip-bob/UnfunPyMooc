@@ -43,8 +43,8 @@ class MazeGame:
         self.map, self.mapW, self.mapH = MazeGame.loadCastle(self.cfg.fichier_plan)
 
         (minX, minY), (maxX, maxY) = self.cfg.ZONE_PLAN_MINI, self.cfg.ZONE_PLAN_MAXI
-        (dX, dY) = (maxX - minX, maxY - minY)
-        self.cellRatio = min(dX / self.mapW, dY / self.mapH)
+        (dtX, dtY) = (maxX - minX, maxY - minY)
+        self.cellRatio = min(dtX / self.mapW, dtY / self.mapH)
 
         self.player = self.cfg.POSITION_DEPART
 
