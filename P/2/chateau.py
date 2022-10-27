@@ -37,7 +37,7 @@ class MazeGame:
         self.inventoryGfx.goto(self.cfg.POINT_AFFICHAGE_INVENTAIRE)
 
         # Game Values
-        self.fontSizes = [("Arial", 10, "normal"), ("Arial", 12, "normal"), ("Arial", 14, "bold")]
+        self.fontKinds = [("Arial", 10, "normal"), ("Arial", 12, "normal"), ("Arial", 14, "bold")]
         self.inventory = []
 
         # Map & Square Size
@@ -122,7 +122,7 @@ class MazeGame:
     def addItem(self, item):
         self.inventory.append(item)
         self.inventoryGfx.forward(24) # 9pt
-        self.inventoryGfx.write(self.inventory[-1], font=self.fontSizes[0])
+        self.inventoryGfx.write(self.inventory[-1], font=self.fontKinds[0])
 
     def pickUp(self):
         (y, x) = self.player
@@ -189,14 +189,14 @@ class MazeGame:
 
     def drawAnnouncements(self, text, fontType):
         self.announcementGfx.undo()
-        self.announcementGfx.write(text, font = self.fontSizes[fontType])
+        self.announcementGfx.write(text, font = self.fontKinds[fontType])
 
     def drawMaze(self):
         for (x, y) in self.cartesianIter(): self.drawSquare(x, y)
 
     def drawInit(self):
         self.drawAnnouncements("Bienvenu dans le Labyrinthe Python", 2)
-        self.inventoryGfx.write("Inventaire", font = self.fontSizes[1])
+        self.inventoryGfx.write("Inventaire", font = self.fontKinds[1])
         self.drawMaze()
         self.drawPlayer()
 
