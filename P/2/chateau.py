@@ -177,17 +177,14 @@ class MazeGame:
         self.castleGfx.fillcolor(self.cfg.COULEUR_PERSONNAGE)
         self.castleGfx.stamp()
 
-    def cartesianIter(self):
+    def drawMaze(self):
         for y in range(self.mapH):
             for x in range(self.mapW):
-                yield (x, y)
+                self.drawSquare(x, y)
 
     def drawAnnouncements(self, text, fontType):
         self.announcementGfx.undo()
         self.announcementGfx.write(text, font = self.fontKinds[fontType])
-
-    def drawMaze(self):
-        for (x, y) in self.cartesianIter(): self.drawSquare(x, y)
 
     def drawInit(self):
         self.announcementGfx.write("Bienvenu dans le Labyrinthe Python", font = self.fontKinds[2])
