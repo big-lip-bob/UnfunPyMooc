@@ -206,4 +206,4 @@ class MazeGame:
         turtle.listen()
         turtle.mainloop()
 
-MazeGame().play()
+MazeGame().render()
