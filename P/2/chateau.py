@@ -94,6 +94,9 @@ class MazeGame:
                 dico[(x, y)] = (question, reponse)
         return dico
 
+    def getCell(self, x, y): return self.map[y][x]
+    def inBounds(self, x, y): return 0 <= x < self.mapW and 0 <= y < self.mapH
+
     def movePlayer(self, dx, dy):
         (py, px) = self.player
         (nx, ny) = (px + dy, py - dx)
@@ -154,9 +157,6 @@ class MazeGame:
         turtle.onkeypress(lambda: self.movePlayer( 0,  1), "Right")
         turtle.onkeypress(lambda: self.movePlayer(-1,  0), "Down" )
         turtle.onkeypress(lambda: self.movePlayer( 0, -1), "Left" )
-
-    def getCell(self, x, y): return self.map[y][x]
-    def inBounds(self, x, y): return 0 <= x < self.mapW and 0 <= y < self.mapH
 
     def drawGoto(self, x, y):
         (ox, oy) = self.cfg.ZONE_PLAN_MAXI
