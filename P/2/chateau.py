@@ -172,15 +172,13 @@ class MazeGame:
         (ox, oy) = self.cfg.ZONE_PLAN_MAXI
 
         (py, px) = self.player
-        self.castleGfx.goto(ox - (self.mapW - (px + .5)) * self.cellRatio, oy - (py + 0) * self.cellRatio)
+        self.castleGfx.goto(ox - (self.mapW - (px + .5)) * self.cellRatio, oy - (py - .5) * self.cellRatio)
 
-        self.castleGfx.fillcolor(self.cfg.COULEUR_PERSONNAGE)
+        self.castleGfx.shape("circle")
         self.castleGfx.pencolor("black")
-        self.castleGfx.pendown()
-        self.castleGfx.begin_fill()
-        self.castleGfx.circle(self.cellRatio / 2 * self.cfg.RATIO_PERSONNAGE)
-        self.castleGfx.end_fill()
-        self.castleGfx.penup()
+        self.castleGfx.shapesize(self.cellRatio / 2 * self.cfg.RATIO_PERSONNAGE / 10)
+        self.castleGfx.fillcolor(self.cfg.COULEUR_PERSONNAGE)
+        self.castleGfx.stamp()
 
     def cartesianIter(self):
         for y in range(self.mapH):
