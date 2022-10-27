@@ -13,6 +13,7 @@ class Cell:
     def visit(self): self.kind = self.Visitee
 
 class MazeGame:
+    # Constructor: Initializes and builds the maze + turtle logic
     def __init__(self, config = CONFIGS):
         self.cfg = config
 
@@ -26,6 +27,7 @@ class MazeGame:
         # Turtle Setups
         self.bindControls()
 
+        # Different turtle per parts, for easy undo and tracking
         self.castleGfx = MazeGame.makeTurtle()
 
         self.announcementGfx = MazeGame.makeTurtle()
@@ -123,8 +125,8 @@ class MazeGame:
 
     def addItem(self, item):
         self.inventory.append(item)
-        self.inventoryGfx.forward(24) # 9pt
-        self.inventoryGfx.write(self.inventory[-1], font=self.fontKinds[0])
+        self.inventoryGfx.forward(24) # 18pt
+        self.inventoryGfx.write(self.inventory[-1], font = self.fontKinds[0])
 
     def pickUp(self):
         (y, x) = self.player
