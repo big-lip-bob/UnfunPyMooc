@@ -30,7 +30,6 @@ class MazeGame:
 
         self.announcementGfx = MazeGame.makeTurtle()
         self.announcementGfx.goto(self.cfg.POINT_AFFICHAGE_ANNONCES)
-        self.announcementGfx.stamp() # Pour qu'undo ne reviennes pas à 0, 0
 
         self.inventoryGfx = MazeGame.makeTurtle()
         self.inventoryGfx.setheading(-90)
@@ -193,7 +192,7 @@ class MazeGame:
         for (x, y) in self.cartesianIter(): self.drawSquare(x, y)
 
     def drawInit(self):
-        self.drawAnnouncements("Bienvenu dans le Labyrinthe Python", 2)
+        self.announcementGfx.write("Bienvenu dans le Labyrinthe Python", font = self.fontKinds[2])
         self.inventoryGfx.write("Inventaire", font = self.fontKinds[1])
         self.drawMaze()
         self.drawPlayer()
