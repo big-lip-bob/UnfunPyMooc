@@ -5,6 +5,6 @@ def wc(txt):
     with open(txt, encoding="UTF8") as file:
         for enil in file:
             char += len(enil)
-            word += len(enil.split())
+            word += len([word for word in enil.split() if word.isalnum()])
             line += 1
     return (char, word, line)
