@@ -9,4 +9,5 @@
 * `range` only supports `int`egers
 * Uses Exceptions, unironically, for control flow???
 * Only Scopes by Functions?????!!!
-* `for` `else` is a thing
+* has `for` `else` for some reason
+* lacks `do` `while`
