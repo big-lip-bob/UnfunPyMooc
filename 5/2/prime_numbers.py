@@ -4,7 +4,7 @@ def prime_numbers(n):
     if n < len(primes): return primes[:n]
 
     maybe = 5
-    sqrt = maybe ** 0.5
+    sqrt = int(maybe ** 0.5)
 
     while len(primes) < n:
         idx = 1
@@ -13,5 +13,6 @@ def prime_numbers(n):
             idx += 1
         else: primes.append(maybe)
         maybe += 2
-        sqrt = maybe ** 0.5
+        sqrt = int(maybe ** 0.5)
+    
     return primes
