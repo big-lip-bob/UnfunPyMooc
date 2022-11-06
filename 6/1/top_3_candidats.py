@@ -5,4 +5,4 @@ def top_3_candidats(moyennes):
         for i in reversed(range(len(max)-1)):
             if max[i][1] < max[i+1][1]: max[i], max[i+1] = max[i+1], max[i]
 
-    return tuple([candidat[0] for candidat[:-1] in max])
+    return tuple([candidat[0] for candidat in max[:-1]])
