@@ -101,7 +101,7 @@ class MazeGame:
 
     def movePlayer(self, dx, dy):
         (py, px) = self.player
-        (nx, ny) = (px + dy, py - dx)
+        (nx, ny) = (px + dx, py - dy)
 
         if self.inBounds(nx, ny):
             cell = self.getCell(nx, ny)
@@ -153,10 +153,10 @@ class MazeGame:
 
 
     def bindControls(self):
-        turtle.onkeypress(lambda: self.movePlayer( 1,  0), "Up"   )
-        turtle.onkeypress(lambda: self.movePlayer( 0,  1), "Right")
-        turtle.onkeypress(lambda: self.movePlayer(-1,  0), "Down" )
-        turtle.onkeypress(lambda: self.movePlayer( 0, -1), "Left" )
+        turtle.onkeypress(lambda: self.movePlayer( 0,  1), "Up"   )
+        turtle.onkeypress(lambda: self.movePlayer( 1,  0), "Right")
+        turtle.onkeypress(lambda: self.movePlayer( 0, -1), "Down" )
+        turtle.onkeypress(lambda: self.movePlayer(-1,  0), "Left" )
 
     def drawGoto(self, x, y):
         (ox, oy) = self.cfg.ZONE_PLAN_MAXI
