@@ -51,8 +51,8 @@ class MazeGame:
         self.player = self.cfg.POSITION_DEPART
 
         # Inventory & Doors
-        self.clues = MazeGame.loadObjects(self.cfg.fichier_objets)
-        self.doors = MazeGame.loadDoors(self.cfg.fichier_questions)
+        self.clues = MazeGame.loadTupleRest(self.cfg.fichier_objets)
+        self.doors = MazeGame.loadTupleRest(self.cfg.fichier_questions)
 
     @staticmethod
     def makeTurtle():
@@ -77,23 +77,13 @@ class MazeGame:
         return (map, w, h)
 
     @staticmethod
-    def loadObjects(file):
+    def loadTupleRest(file):
         dico = {}
         with open(file, 'r', encoding = "UTF8") as file:
             for line in file:
                 # eval est une tres mauvaise idée dans des fichiers lambda
-                (y, x), indice = ast.literal_eval(line)
-                dico[(x, y)] = indice
-        return dico
-
-    @staticmethod
-    def loadDoors(file):
-        dico = {}
-        with open(file, 'r', encoding="UTF8") as file:
-            for line in file:
-                # eval est une tres mauvaise idée dans des fichiers lambda
-                (y, x), (question, reponse) = ast.literal_eval(line)
-                dico[(x, y)] = (question, reponse)
+                (y, x), reste = ast.literal_eval(line)
+                dico[(x, y)] = reste
         return dico
 
     def getCell(self, x, y): return self.map[y][x]
