@@ -2,6 +2,7 @@ import ast
 import turtle # Let me drown
 import CONFIGS
 
+# Helper class for cell variants
 class Cell:
     Vide, Mur, Sortie, Porte, Item, Visitee = 0, 1, 2, 3, 4, 5
 
@@ -23,9 +24,6 @@ class MazeGame:
         turtle.setup(self.winW * 1.1, self.winH * 1.1, 0, 0)
         turtle.screensize(self.winW, self.winH, self.cfg.COULEUR_EXTERIEUR)
         turtle.title("Labyrinthe Trivia Python")
-
-        # Turtle Setups
-        self.bindControls()
 
         # Different turtle per parts, for easy undo and tracking
         self.castleGfx = MazeGame.makeTurtle()
@@ -54,6 +52,7 @@ class MazeGame:
         self.clues = MazeGame.loadTupleRest(self.cfg.fichier_objets)
         self.doors = MazeGame.loadTupleRest(self.cfg.fichier_questions)
 
+
     @staticmethod
     def makeTurtle():
         drawer = turtle.Turtle()
@@ -61,6 +60,7 @@ class MazeGame:
         drawer.hideturtle()
         drawer.penup()
         return drawer
+
 
     @staticmethod
     def loadCastle(file):
@@ -76,6 +76,7 @@ class MazeGame:
 
         return (map, w, h)
 
+
     @staticmethod
     def loadTupleRest(file):
         dico = {}
@@ -86,8 +87,10 @@ class MazeGame:
                 dico[(x, y)] = reste
         return dico
 
+
     def getCell(self, x, y): return self.map[y][x]
     def inBounds(self, x, y): return 0 <= x < self.mapW and 0 <= y < self.mapH
+
 
     def movePlayer(self, dx, dy):
         (py, px) = self.player
@@ -107,16 +110,18 @@ class MazeGame:
                     self.pickUp()
 
                 elif cell.kind == Cell.Sortie:
-                    self.drawAnnouncements("Bravo, vouz avez résolu le labyrinthe", 2)
+                    self.drawAnnouncements("Bravo, vous avez résolu le labyrinthe", 2)
                     self.addItem("Les clés du chateau :)")
 
             elif cell.kind == Cell.Porte:
                 self.tryDoor(nx, ny)
 
+
     def addItem(self, item):
         self.inventory.append(item)
         self.inventoryGfx.forward(24) # 18pt
         self.inventoryGfx.write(self.inventory[-1], font = self.fontKinds[0])
+
 
     def pickUp(self):
         (y, x) = self.player
@@ -128,11 +133,12 @@ class MazeGame:
         self.announcementGfx.undo()
         self.announcementGfx.write(text, font = self.fontKinds[fontType])
 
+
     def tryDoor(self, dx, dy):
         self.drawAnnouncements("La porte est fermée", 1)
         (question, answer) = self.doors[(dx, dy)]
         attempt = turtle.textinput("Pour m'ouvrir, résout l'énigme", question)
-        if attempt and attempt.strip() == answer:
+        if attempt and attempt == answer: # .strip() ?
             self.drawAnnouncements("Shazam, ouvre toi!", 1)
             self.getCell(dx, dy).kind = Cell.Vide
             self.drawSquare(dx, dy)
@@ -148,22 +154,26 @@ class MazeGame:
         turtle.onkeypress(lambda: self.movePlayer( 0, -1), "Down" )
         turtle.onkeypress(lambda: self.movePlayer(-1,  0), "Left" )
 
+
     def drawGoto(self, x, y):
         (ox, oy) = self.cfg.ZONE_PLAN_MAXI
         self.castleGfx.goto(ox - (self.mapW - (x + .5)) * self.cellRatio, oy - (y - .5) * self.cellRatio)
+
 
     def drawSquare(self, x, y):
         self.drawGoto(x, y)
 
         self.castleGfx.shape("square")
-        self.castleGfx.pencolor(self.cfg.COULEUR_EXTERIEUR)
         self.castleGfx.shapesize(self.cellRatio / 20)
+        self.castleGfx.pencolor(self.cfg.COULEUR_EXTERIEUR)
         self.castleGfx.fillcolor(self.cfg.COULEURS[self.getCell(x, y).kind])
         self.castleGfx.stamp()
+
 
     def drawMaze(self):
         for y in range(self.mapH):
             for x in range(self.mapW):
+
                 self.drawSquare(x, y)
 
     def drawPlayer(self):
@@ -175,19 +185,24 @@ class MazeGame:
         self.castleGfx.fillcolor(self.cfg.COULEUR_PERSONNAGE)
         self.castleGfx.stamp()
 
+
     def drawInit(self):
         self.announcementGfx.write("Bienvenu dans le Labyrinthe Python", font = self.fontKinds[2])
         self.inventoryGfx.write("Inventaire", font = self.fontKinds[1])
         self.drawMaze()
         self.drawPlayer()
 
+
     def render(self): # Niveau 1
         self.drawMaze()
         turtle.getcanvas().postscript(file = "chateau.eps")
 
+
     def play(self): # Niveau 4
         self.drawInit()
+        self.bindControls()
         turtle.listen()
         turtle.mainloop()
+
 
 MazeGame().play()
