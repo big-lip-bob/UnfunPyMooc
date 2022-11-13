@@ -144,7 +144,6 @@ class MazeGame:
             self.drawSquare(dx, dy)
         else:
             self.drawAnnouncements("Mauvaise réponse", 1)
-
         turtle.listen()
 
 
@@ -173,8 +172,8 @@ class MazeGame:
     def drawMaze(self):
         for y in range(self.mapH):
             for x in range(self.mapW):
-
                 self.drawSquare(x, y)
+
 
     def drawPlayer(self):
         self.drawGoto(*reversed(self.player))
