@@ -130,7 +130,7 @@ class MazeGame:
         self.drawAnnouncements(f"Vous avez trouver un indice: {item}", 1)
 
     def drawAnnouncements(self, text, fontType):
-        self.announcementGfx.undo()
+        self.announcementGfx.clear()
         self.announcementGfx.write(text, font = self.fontKinds[fontType])
 
 
@@ -186,7 +186,7 @@ class MazeGame:
 
 
     def drawInit(self):
-        self.announcementGfx.write("Bienvenu dans le Labyrinthe Python", font = self.fontKinds[2])
+        self.drawAnnouncements("Bienvenu dans le Labyrinthe Python", 2)
         self.inventoryGfx.write("Inventaire", font = self.fontKinds[1])
         self.drawMaze()
         self.drawPlayer()
