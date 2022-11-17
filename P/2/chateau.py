@@ -96,25 +96,25 @@ class MazeGame:
         (py, px) = self.player
         (nx, ny) = (px + dx, py - dy)
 
-        if self.inBounds(nx, ny):
-            cell = self.getCell(nx, ny)
+        if not self.inBounds(nx, ny): return
+        cell = self.getCell(nx, ny)
 
-            if cell.passable():
-                self.getCell(px, py).visit()
-                self.drawSquare(px, py)
+        if cell.passable():
+            self.getCell(px, py).visit()
+            self.drawSquare(px, py)
 
-                self.player = (ny, nx)
-                self.drawPlayer()
+            self.player = (ny, nx)
+            self.drawPlayer()
 
-                if cell.kind == Cell.Item:
-                    self.pickUp()
+            if cell.kind == Cell.Item:
+                self.pickUp()
 
-                elif cell.kind == Cell.Sortie:
-                    self.drawAnnouncements("Bravo, vous avez résolu le labyrinthe", 2)
-                    self.addItem("Les clés du chateau :)")
+            elif cell.kind == Cell.Sortie:
+                self.drawAnnouncements("Bravo, vous avez résolu le labyrinthe", 2)
+                self.addItem("Les clés du chateau :)")
 
-            elif cell.kind == Cell.Porte:
-                self.tryDoor(nx, ny)
+        elif cell.kind == Cell.Porte:
+            self.tryDoor(nx, ny)
 
 
     def addItem(self, item):
