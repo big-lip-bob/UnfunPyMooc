@@ -1,8 +1,15 @@
-import ast
+"""
+Project 1: Jeu labyrinthe
+Kovalskiy Yan (570217)
+"""
+
+from ast import literal_eval as eval
 import turtle # Let me drown
 import CONFIGS
 
-# Helper class for cell variants
+"""
+Classe d'aide pour représenter les divers types de cases
+"""
 class Cell:
     Vide, Mur, Sortie, Porte, Item, Visitee = 0, 1, 2, 3, 4, 5
 
@@ -13,8 +20,17 @@ class Cell:
     def passable(self): return self.kind not in [Cell.Mur, Cell.Porte]
     def visit(self): self.kind = Cell.Visitee
 
+"""
+Classe représentant le chateau ainsi que les fonctionnalités
+Elle assume le chargement et la creation du plan et aussi le jeu en lui meme
+"""
 class MazeGame:
-    # Constructor: Initializes and builds the maze + turtle logic
+    """
+    Constructeur principal
+    Depuis la configuration fournie, initialise le jeu
+    Charge la carte, les objects et portes
+    Setup les différents turtles (Plateau, inventaire, annonces)
+    """
     def __init__(self, config = CONFIGS):
         self.cfg = config
 
@@ -53,6 +69,7 @@ class MazeGame:
         self.doors = MazeGame.loadTupleRest(self.cfg.fichier_questions)
 
 
+    """ Méthode pour créer des turtles prêts """
     @staticmethod
     def makeTurtle():
         drawer = turtle.Turtle()
@@ -62,6 +79,7 @@ class MazeGame:
         return drawer
 
 
+    """ Méthode pour charger le plan du chateau """
     @staticmethod
     def loadCastle(file):
 
@@ -77,21 +95,25 @@ class MazeGame:
         return (map, w, h)
 
 
+    """ Méthode pour charger les fichiers objects et portes """
     @staticmethod
     def loadTupleRest(file):
         dico = {}
         with open(file, 'r', encoding = "UTF8") as file:
             for line in file:
                 # eval est une tres mauvaise idée dans des fichiers lambda
-                (y, x), reste = ast.literal_eval(line)
+                (y, x), reste = eval(line)
                 dico[(x, y)] = reste
         return dico
 
 
+    """ Méthode pour obtenir une case en (x, y) """
     def getCell(self, x, y): return self.map[y][x]
+    """ Méthode pour vérifier si une coordonée (x, y) fait partie du plan """
     def inBounds(self, x, y): return 0 <= x < self.mapW and 0 <= y < self.mapH
 
 
+    """ Méthode qui gère les déplacements du joueur (et qui appelle les fonctions items / portes si nécessaire) """
     def movePlayer(self, dx, dy):
         (py, px) = self.player
         (nx, ny) = (px + dx, py - dy)
@@ -117,23 +139,28 @@ class MazeGame:
             self.tryDoor(nx, ny)
 
 
+    """ Méthode qui ajoute un item dans l'inventaire """
     def addItem(self, item):
         self.inventory.append(item)
         self.inventoryGfx.forward(24) # 18pt
         self.inventoryGfx.write(self.inventory[-1], font = self.fontKinds[0])
 
 
+    """ Méthode qui prend un item depuis le plan et l'annonce """
     def pickUp(self):
         (y, x) = self.player
         item = self.clues[(x, y)]
         self.addItem(item)
         self.drawAnnouncements(f"Vous avez trouver un indice: {item}", 1)
 
+
+    """ Méthode qui dessine une annonce """
     def drawAnnouncements(self, text, fontType):
         self.announcementGfx.clear()
         self.announcementGfx.write(text, font = self.fontKinds[fontType])
 
 
+    """ Méthode qui gère une porte, l'ouvre si la réponse est bonne, sinon rien """
     def tryDoor(self, dx, dy):
         self.drawAnnouncements("La porte est fermée", 1)
         (question, answer) = self.doors[(dx, dy)]
@@ -147,6 +174,7 @@ class MazeGame:
         turtle.listen()
 
 
+    """ Méthode qui associe les différents controles """
     def bindControls(self):
         turtle.onkeypress(lambda: self.movePlayer( 0,  1), "Up"   )
         turtle.onkeypress(lambda: self.movePlayer( 1,  0), "Right")
@@ -154,11 +182,13 @@ class MazeGame:
         turtle.onkeypress(lambda: self.movePlayer(-1,  0), "Left" )
 
 
+    """ Méthode qui déplace le turtle du plan à la case spécifiée """
     def drawGoto(self, x, y):
         (ox, oy) = self.cfg.ZONE_PLAN_MAXI
         self.castleGfx.goto(ox - (self.mapW - (x + .5)) * self.cellRatio, oy - (y - .5) * self.cellRatio)
 
 
+    """ Méthode qui dessine la case en (x, y) """
     def drawSquare(self, x, y):
         self.drawGoto(x, y)
 
@@ -169,12 +199,14 @@ class MazeGame:
         self.castleGfx.stamp()
 
 
+    """ Méthode qui dessine l'entièreté du plan """
     def drawMaze(self):
         for y in range(self.mapH):
             for x in range(self.mapW):
                 self.drawSquare(x, y)
 
 
+    """ Méthode qui dessine le joueur """
     def drawPlayer(self):
         self.drawGoto(*reversed(self.player))
 
@@ -185,6 +217,7 @@ class MazeGame:
         self.castleGfx.stamp()
 
 
+    """ Méthode qui effectue le premier dessin (plan, joueur, annonces, inventaire) """
     def drawInit(self):
         self.drawAnnouncements("Bienvenu dans le Labyrinthe Python", 2)
         self.inventoryGfx.write("Inventaire", font = self.fontKinds[1])
@@ -192,11 +225,13 @@ class MazeGame:
         self.drawPlayer()
 
 
+    """ Méthode qui dessine le chateau dans un fichier post-script """
     def render(self): # Niveau 1
         self.drawMaze()
         turtle.getcanvas().postscript(file = "chateau.eps")
 
 
+    """ Méthode qui fait jouer le jeu """
     def play(self): # Niveau 4
         self.drawInit()
         self.bindControls()
